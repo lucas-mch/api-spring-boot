@@ -18,10 +18,10 @@ public class PessoaResource {
     @Autowired
     public PessoaResource(PessoaServiceImp pessoaService) { this.pessoaService = pessoaService; }
 
-    @GetMapping("/list")
+    @RequestMapping(method = RequestMethod.GET)
     public List<Pessoa> getPessoas(){ return pessoaService.findAll(); }
 
-    @RequestMapping(value = "/pessoa", method =  RequestMethod.POST)
+    @RequestMapping(method =  RequestMethod.POST)
     public Pessoa Post(@RequestBody Pessoa pessoa)
     {
         return pessoaService.save(pessoa);

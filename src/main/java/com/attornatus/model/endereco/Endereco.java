@@ -1,11 +1,9 @@
 package com.attornatus.model.endereco;
 
 import com.attornatus.enterprise.AbstractEntity;
+import com.attornatus.model.pessoa.Pessoa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +16,8 @@ public class Endereco extends AbstractEntity {
     private Integer numero;
     private String cidade;
     private Boolean isPrincipal = Boolean.FALSE;
+    @ManyToOne
+    private Pessoa pessoa;
 
     public Endereco() {
     }

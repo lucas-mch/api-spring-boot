@@ -5,7 +5,9 @@ import com.attornatus.model.endereco.Endereco;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,8 +17,8 @@ public class Pessoa extends AbstractEntity {
     private Long id;
     private String nome;
     private Date dataNascimento;
-    @OneToOne
-    private Endereco endereco;
+    @OneToMany(mappedBy = "pessoa")
+    private List<Endereco> enderecos = new ArrayList<>();
 
     public Pessoa() {
     }
@@ -45,13 +47,9 @@ public class Pessoa extends AbstractEntity {
         this.dataNascimento = dataNascimento;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
+    public List<Endereco> getEnderecos() { return enderecos; }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+    public void addEndereco(Endereco endereco){ enderecos.add(endereco); }
 
     @Override
     public boolean equals(Object o) {
