@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
 import java.util.Date;
 
 @SpringBootApplication
@@ -25,27 +26,27 @@ public class AttornatusApplication implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-        Pessoa p1 = new Pessoa();
-        Endereco e1 = new Endereco();
-        Endereco e2 = new Endereco();
 
-        e1.setCEP(88708071);
-        e1.setLogradouro("Rua Manoel Jovencio de Castro");
-        e1.setNumero(133);
+        Pessoa p1 = Pessoa.Builder.create()
+                .id(null)
+                .nome("Lucas Machado de Souza")
+                .dataNascimento(new Date("11/10/1998"))
+                .build();
 
-        e2.setLogradouro("Estrada Geral Barreiros");
-        e2.setCEP(88700100);
-        e2.setNumero(0);
+        Endereco e1 = Endereco.Builder.create()
+                .logradouro("Rua Manoel Jovencio de Castro")
+                .CEP(88708071)
+                .numero(133)
+                .build();
 
-        enderecoService.save(e1);
-        enderecoService.save(e2);
-
-        p1.setNome("Lucas Machado de Souza");
-        p1.setDataNascimento(new Date("11/10/1998"));
-        p1.addEndereco(e1);
-        p1.addEndereco(e2);
+        Endereco e2 = Endereco.Builder.create()
+                .logradouro("Estrada Geral Barreiros")
+                .CEP(88700100)
+                .numero(null)
+                .build();
 
         pessoaService.save(p1);
+        enderecoService.save(e1);
 
     }
 }
