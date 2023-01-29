@@ -12,6 +12,7 @@ import java.util.Optional;
 @Transactional
 public abstract class AbstractBaseRepositoryImpl<T extends AbstractEntity, ID extends Serializable> implements AbstractService<T, ID>{
 
+
     private BasicRepository<T, ID> abstractBaseRepository;
 
     public AbstractBaseRepositoryImpl(BasicRepository<T, ID> abstractBaseRepository) {
