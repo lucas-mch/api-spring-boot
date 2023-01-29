@@ -2,6 +2,7 @@ package com.attornatus.model.endereco;
 
 import com.attornatus.enterprise.AbstractEntity;
 import com.attornatus.model.pessoa.Pessoa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
 @Entity
 public class Endereco extends AbstractEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String logradouro;
     private Integer CEP;
@@ -17,6 +18,8 @@ public class Endereco extends AbstractEntity {
     private String cidade;
     private Boolean isPrincipal = Boolean.FALSE;
     @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name="i_pessoa")
     private Pessoa pessoa;
 
     public Endereco() {
@@ -62,6 +65,14 @@ public class Endereco extends AbstractEntity {
         this.cidade = cidade;
     }
 
+    public Boolean getPrincipal() { return isPrincipal; }
+
+    public void setPrincipal(Boolean principal) { isPrincipal = principal; }
+
+    public Pessoa getPessoa() { return pessoa; }
+
+    public void setPessoa(Pessoa pessoa) { this.pessoa = pessoa; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,9 +80,52 @@ public class Endereco extends AbstractEntity {
         Endereco endereco = (Endereco) o;
         return id.equals(endereco.id);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static final class Builder  {
+
+        protected Endereco entity;
+
+        private Builder(Endereco entity) {
+            this.entity = entity;
+        }
+
+        public static Builder create() {
+            return new Builder(new Endereco());
+        }
+
+        public Builder id(Long id) {
+            entity.id = id;
+            return this;
+        }
+        public Builder logradouro(String logradouro) {
+            entity.logradouro = logradouro;
+            return this;
+        }
+        public Builder CEP(Integer CEP) {
+            entity.CEP = CEP;
+            return this;
+        }
+        public Builder numero(Integer numero) {
+            entity.numero = numero;
+            return this;
+        }
+        public Builder cidade(String cidade) {
+            entity.cidade = cidade;
+            return this;
+        }
+        public Builder isPrincipal(Boolean isPrincipal) {
+            entity.isPrincipal = isPrincipal;
+            return this;
+        }
+        public Endereco build(){
+            return entity;
+        }
+
+
+
     }
 }
