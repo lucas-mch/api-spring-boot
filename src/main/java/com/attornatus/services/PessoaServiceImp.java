@@ -2,16 +2,46 @@ package com.attornatus.services;
 
 import com.attornatus.enterprise.AbstractBaseRepositoryImpl;
 import com.attornatus.enterprise.BasicRepository;
+import com.attornatus.model.endereco.Endereco;
 import com.attornatus.model.pessoa.Pessoa;
 import com.attornatus.model.pessoa.PessoaService;
+import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class PessoaServiceImp extends AbstractBaseRepositoryImpl<Pessoa, Long> implements PessoaService {
-    private PessoaService pessoaService;
-    public PessoaServiceImp(BasicRepository<Pessoa, Long> abstractBaseRepository) { super(abstractBaseRepository); }
+     public PessoaServiceImp(BasicRepository<Pessoa, Long> abstractBaseRepository) { super(abstractBaseRepository); }
 
+     @Autowired
+     private EnderecoServiceImp enderecoService;
+
+     @Override
+     public Optional<Pessoa> findById(Long entityId) {
+          Optional<Pessoa> pessoa = super.findById(entityId);
+          return Optional.ofNullable(pessoa.orElseThrow(() -> new ObjectNotFoundException(entityId, Pessoa.class.getName())));
+     }
+
+     @Override
+     public Pessoa save(Pessoa entity) {
+          entity.setId(null);
+          return super.save(entity);
+     }
+
+     @Override
+     public Pessoa update(Pessoa entity) {
+          findById(entity.getId());
+          Endereco enderecoToSave = new Endereco();
+          if(entity.getEnderecos() != null){
+               for(int i = 0; i < entity.getEnderecos().size(); i++)
+               enderecoToSave = entity.getEnderecos().get(i);
+               enderecoToSave.setPessoa(entity);
+               enderecoService.update(enderecoToSave);
+          }
+          return super.update(entity);
+     }
 }
