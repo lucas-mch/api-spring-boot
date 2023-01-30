@@ -1,11 +1,9 @@
 package com.attornatus.services;
 
-import com.attornatus.enterprise.AbstractBaseRepositoryImpl;
-import com.attornatus.enterprise.BasicRepository;
-import com.attornatus.model.endereco.Endereco;
-import com.attornatus.model.endereco.EnderecoService;
-import com.attornatus.model.pessoa.Pessoa;
-import com.attornatus.model.pessoa.PessoaService;
+import com.attornatus.enterprise.repositories.AbstractBaseRepositoryImpl;
+import com.attornatus.enterprise.repositories.BasicRepository;
+import com.attornatus.enterprise.services.EnderecoService;
+import com.attornatus.model.Endereco;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

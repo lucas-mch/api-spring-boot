@@ -1,6 +1,6 @@
 package com.attornatus.resources;
 
-import com.attornatus.model.pessoa.Pessoa;
+import com.attornatus.model.Pessoa;
 import com.attornatus.services.PessoaServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -44,6 +45,13 @@ public class PessoaResource {
         pessoa = pessoaService.update(pessoa);
         return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> findAll() {
+        List<Pessoa> list = pessoaService.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+
 
 
 }

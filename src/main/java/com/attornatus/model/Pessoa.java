@@ -1,7 +1,6 @@
-package com.attornatus.model.pessoa;
+package com.attornatus.model;
 
-import com.attornatus.enterprise.AbstractEntity;
-import com.attornatus.model.endereco.Endereco;
+import com.attornatus.enterprise.entities.AbstractEntity;
 
 
 import javax.persistence.*;

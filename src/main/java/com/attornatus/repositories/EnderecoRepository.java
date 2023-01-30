@@ -1,6 +1,7 @@
-package com.attornatus.model.endereco;
+package com.attornatus.repositories;
 
-import com.attornatus.enterprise.BasicRepository;
+import com.attornatus.enterprise.repositories.BasicRepository;
+import com.attornatus.model.Endereco;
 import org.springframework.stereotype.Repository;
 
 @Repository

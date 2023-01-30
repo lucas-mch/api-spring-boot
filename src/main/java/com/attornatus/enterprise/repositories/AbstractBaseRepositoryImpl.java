@@ -1,6 +1,7 @@
-package com.attornatus.enterprise;
+package com.attornatus.enterprise.repositories;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.attornatus.enterprise.entities.AbstractEntity;
+import com.attornatus.enterprise.services.AbstractService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public abstract class AbstractBaseRepositoryImpl<T extends AbstractEntity, ID extends Serializable> implements AbstractService<T, ID>{
+public abstract class AbstractBaseRepositoryImpl<T extends AbstractEntity, ID extends Serializable> implements AbstractService<T, ID> {
 
 
     private BasicRepository<T, ID> abstractBaseRepository;

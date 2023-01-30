@@ -1,9 +1,7 @@
 package com.attornatus.resources;
 
-import com.attornatus.model.endereco.Endereco;
-import com.attornatus.model.pessoa.Pessoa;
+import com.attornatus.model.Endereco;
 import com.attornatus.services.EnderecoServiceImp;
-import com.attornatus.services.PessoaServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

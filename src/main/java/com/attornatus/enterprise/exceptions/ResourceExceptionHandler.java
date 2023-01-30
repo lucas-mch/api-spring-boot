@@ -1,4 +1,4 @@
-package com.attornatus.resources.exceptions;
+package com.attornatus.enterprise.exceptions;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;

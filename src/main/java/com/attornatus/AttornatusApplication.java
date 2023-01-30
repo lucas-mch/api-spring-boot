@@ -1,7 +1,7 @@
 package com.attornatus;
 
-import com.attornatus.model.endereco.Endereco;
-import com.attornatus.model.pessoa.Pessoa;
+import com.attornatus.model.Endereco;
+import com.attornatus.model.Pessoa;
 import com.attornatus.services.EnderecoServiceImp;
 import com.attornatus.services.PessoaServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Arrays;
 import java.util.Date;
 
 @SpringBootApplication

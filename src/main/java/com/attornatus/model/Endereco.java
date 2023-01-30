@@ -1,7 +1,6 @@
-package com.attornatus.model.endereco;
+package com.attornatus.model;
 
-import com.attornatus.enterprise.AbstractEntity;
-import com.attornatus.model.pessoa.Pessoa;
+import com.attornatus.enterprise.entities.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

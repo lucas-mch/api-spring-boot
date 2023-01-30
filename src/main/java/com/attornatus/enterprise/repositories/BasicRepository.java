@@ -1,5 +1,6 @@
-package com.attornatus.enterprise;
+package com.attornatus.enterprise.repositories;
 
+import com.attornatus.enterprise.entities.AbstractEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

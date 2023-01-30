@@ -1,4 +1,4 @@
-package com.attornatus.enterprise;
+package com.attornatus.enterprise.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;

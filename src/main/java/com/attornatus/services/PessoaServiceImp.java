@@ -1,10 +1,10 @@
 package com.attornatus.services;
 
-import com.attornatus.enterprise.AbstractBaseRepositoryImpl;
-import com.attornatus.enterprise.BasicRepository;
-import com.attornatus.model.endereco.Endereco;
-import com.attornatus.model.pessoa.Pessoa;
-import com.attornatus.model.pessoa.PessoaService;
+import com.attornatus.enterprise.repositories.AbstractBaseRepositoryImpl;
+import com.attornatus.enterprise.repositories.BasicRepository;
+import com.attornatus.enterprise.services.PessoaService;
+import com.attornatus.model.Endereco;
+import com.attornatus.model.Pessoa;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,9 @@ import java.util.Optional;
 @Service
 @Transactional
 public class PessoaServiceImp extends AbstractBaseRepositoryImpl<Pessoa, Long> implements PessoaService {
-     public PessoaServiceImp(BasicRepository<Pessoa, Long> abstractBaseRepository) { super(abstractBaseRepository); }
+     public PessoaServiceImp(BasicRepository<Pessoa, Long> abstractBaseRepository) {
+          super(abstractBaseRepository);
+     }
 
      @Autowired
      private EnderecoServiceImp enderecoService;
@@ -36,11 +38,13 @@ public class PessoaServiceImp extends AbstractBaseRepositoryImpl<Pessoa, Long> i
      public Pessoa update(Pessoa entity) {
           findById(entity.getId());
           Endereco enderecoToSave = new Endereco();
-          if(entity.getEnderecos() != null){
-               for(int i = 0; i < entity.getEnderecos().size(); i++)
-               enderecoToSave = entity.getEnderecos().get(i);
-               enderecoToSave.setPessoa(entity);
-               enderecoService.update(enderecoToSave);
+          //todo implementar no EnderecoServiceImp xD
+          if (entity.getEnderecos() != null) {
+               for (int i = 0; i < entity.getEnderecos().size(); i++) {
+                    enderecoToSave = entity.getEnderecos().get(i);
+                    enderecoToSave.setPessoa(entity);
+                    enderecoService.update(enderecoToSave);
+               }
           }
           return super.update(entity);
      }
