@@ -1,41 +1,26 @@
 package com.attornatus.model;
 
 import com.attornatus.enterprise.entities.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class Pessoa extends AbstractEntity {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
     private String nome;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dataNascimento;
     @OneToMany(mappedBy="pessoa")
+    @JsonIgnore
     private List<Endereco> enderecos = new ArrayList<>();
 
     public Pessoa() {
     }
-
-    public Pessoa(Long id, String nome, Date dataNascimento) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -56,19 +41,6 @@ public class Pessoa extends AbstractEntity {
 
     public void addEndereco(Endereco endereco){ enderecos.add(endereco); }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pessoa pessoa = (Pessoa) o;
-        return id.equals(pessoa.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     public static final class Builder  {
 
         protected Pessoa entity;
@@ -82,7 +54,7 @@ public class Pessoa extends AbstractEntity {
         }
 
         public Builder id(Long id) {
-            entity.id = id;
+            entity.setId(id);
             return this;
         }
 
@@ -99,7 +71,6 @@ public class Pessoa extends AbstractEntity {
         public Pessoa build(){
             return entity;
         }
-
 
     }
 

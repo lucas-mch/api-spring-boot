@@ -8,28 +8,16 @@ import java.util.Objects;
 
 @Entity
 public class Endereco extends AbstractEntity {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
     private String logradouro;
     private Integer CEP;
     private Integer numero;
     private String cidade;
     private Boolean isPrincipal = Boolean.FALSE;
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name="i_pessoa")
     private Pessoa pessoa;
 
     public Endereco() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogradouro() {
@@ -72,18 +60,6 @@ public class Endereco extends AbstractEntity {
 
     public void setPessoa(Pessoa pessoa) { this.pessoa = pessoa; }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Endereco endereco = (Endereco) o;
-        return id.equals(endereco.id);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     public static final class Builder  {
 
         protected Endereco entity;
@@ -97,7 +73,7 @@ public class Endereco extends AbstractEntity {
         }
 
         public Builder id(Long id) {
-            entity.id = id;
+            entity.setId(id);
             return this;
         }
         public Builder logradouro(String logradouro) {

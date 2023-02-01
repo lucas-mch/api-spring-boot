@@ -1,7 +1,9 @@
 package com.attornatus.resources;
 
+import com.attornatus.model.Endereco;
 import com.attornatus.model.Pessoa;
-import com.attornatus.services.PessoaServiceImp;
+import com.attornatus.services.EnderecoService;
+import com.attornatus.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +18,8 @@ import java.util.Optional;
 @RequestMapping("/pessoa")
 public class PessoaResource {
 
-    private final PessoaServiceImp pessoaService;
-
     @Autowired
-    public PessoaResource(PessoaServiceImp pessoaService) {
-        this.pessoaService = pessoaService;
-    }
-
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Long id) {
-        Optional<Pessoa> pessoa = pessoaService.findById(id);
-        return ResponseEntity.ok().body(pessoa);
-    }
+    private PessoaService pessoaService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@RequestBody Pessoa pessoa) {
@@ -46,12 +37,16 @@ public class PessoaResource {
         return ResponseEntity.noContent().build();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable Long id) {
+        Optional<Pessoa> pessoa = pessoaService.findById(id);
+        return ResponseEntity.ok().body(pessoa);
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAll() {
         List<Pessoa> list = pessoaService.findAll();
         return ResponseEntity.ok().body(list);
     }
-
-
 
 }
