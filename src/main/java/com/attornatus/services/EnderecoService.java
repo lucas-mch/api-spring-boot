@@ -26,14 +26,12 @@ public class EnderecoService {
         return save(endereco);
     }
     public List<Endereco> findAllFromPessoa(Long pessoaId){ return enderecoRepository.findAllFromPessoa(pessoaId); }
-
     public Endereco setEnderecoPrincipal(Long pessoaId, Long enderecoId){
         inativaTodosEnderecos(pessoaId);
         Optional<Endereco> enderecoToSetPrincipal = enderecoRepository.findById(enderecoId);
         enderecoToSetPrincipal.get().setPrincipal(true);
         return save(enderecoToSetPrincipal.get());
     }
-
     public void inativaTodosEnderecos(Long pessoaId){
         List<Endereco> enderecos = findAllFromPessoa(pessoaId);
         for(Endereco endereco : enderecos){

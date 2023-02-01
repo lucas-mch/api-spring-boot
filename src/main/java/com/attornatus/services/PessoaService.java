@@ -15,20 +15,16 @@ public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
-
     @Autowired
     private EnderecoRepository enderecoRepository;
 
     public Pessoa save(Pessoa pessoa){
         return pessoaRepository.save(pessoa);
     }
-
     public Pessoa update(Pessoa pessoa) {
         return save(pessoa);
     }
-
     public Optional<Pessoa> findById(Long id) { return pessoaRepository.findById(id); }
-
     public List<Pessoa> findAll(){ return pessoaRepository.findAll(); }
 
 }

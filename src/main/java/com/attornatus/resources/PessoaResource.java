@@ -26,7 +26,6 @@ public class PessoaResource {
         pessoa = pessoaService.save(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(pessoa.getId()).toUri();
-
         return ResponseEntity.created(uri).build();
     }
 
