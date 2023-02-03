@@ -1,0 +1,1 @@
+docker build --tag=lcsmachaado/attornatus-spring-boot:latest .
