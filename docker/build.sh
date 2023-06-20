@@ -1,1 +1,1 @@
-docker build --tag=lcsmachaado/attornatus-spring-boot:latest .
+docker build --tag=lcsmachaado/api-lucas-spring-boot:latest .
