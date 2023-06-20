@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "master", "release"]
+    branches: [ "master"]
   pull_request:
-    branches: [ "master","release"]
+    branches: [ "master"]
 
 jobs:
   build:
@@ -22,10 +22,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
+      env:
+        SPRING_PROFILES_ACTIVE: "prod"
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'corretto'
         cache: maven
     - name: Build with Maven
-      run: mvn -B -Pprod package --file pom.xml
+      run: mvn -B package --file pom.xml
