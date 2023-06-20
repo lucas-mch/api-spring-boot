@@ -23,7 +23,11 @@ public class EnderecoService {
     public Endereco saveToPessoa(Endereco endereco, Long pessoaId){
         Optional<Pessoa> toSave = pessoaRepository.findById(pessoaId);
         endereco.setPessoa(toSave.get());
-        return save(endereco);
+        Endereco enderecoSalvo = save(endereco);
+        if(enderecoSalvo.getPrincipal()){
+            setEnderecoPrincipal(toSave.get().getId(), endereco.getId());
+        }
+        return enderecoSalvo;
     }
     public List<Endereco> findAllFromPessoa(Long pessoaId){ return enderecoRepository.findAllFromPessoa(pessoaId); }
     public Endereco setEnderecoPrincipal(Long pessoaId, Long enderecoId){
