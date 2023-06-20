@@ -10,14 +10,16 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "master", "release"]
+    branches: [ "master"]
   pull_request:
-    branches: [ "master","release"]
+    branches: [ "master"]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    environment:
+      name: Production
 
     steps:
     - uses: actions/checkout@v3
@@ -28,4 +30,10 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: Build with Maven
+      env:
+        SPRING_PROFILES_ACTIVE: "prod"
+        APP_ENV: production
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+        SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
       run: mvn -B package --file pom.xml
