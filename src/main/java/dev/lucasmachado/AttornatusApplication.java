@@ -21,20 +21,5 @@ public class AttornatusApplication implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-
-//        Pessoa p1 = Pessoa.Builder.create()
-//                .id(1L)
-//                .nome("Lucas Machado de Souza")
-//                .dataNascimento(new Date("11/10/1998"))
-//                .build();
-//
-//        Pessoa p2 = Pessoa.Builder.create()
-//                .id(2L)
-//                .nome("Mikhail Tal")
-//                .dataNascimento(new Date("09/11/1936"))
-//                .build();
-//
-//        pessoaRepository.saveAll(Arrays.asList(p1,p2));
-
     }
 }
