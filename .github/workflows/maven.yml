@@ -36,4 +36,8 @@ jobs:
     - name: Build with Maven
       env:
         SPRING_PROFILES_ACTIVE: "prod"
+        APP_ENV: production
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+        SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
       run: mvn -B package --file pom.xml
