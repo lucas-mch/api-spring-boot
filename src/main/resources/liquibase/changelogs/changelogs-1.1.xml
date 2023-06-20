@@ -17,12 +17,7 @@
 
     <changeSet id="1" author="lucas">
         <dropColumn tableName="enderecos" columnName="nome">
-
         </dropColumn>
-    </changeSet>
-
-    <changeSet id="2" author="lucas">
-        <dropTable tableName="pessoa"/>
     </changeSet>
 
 </databaseChangeLog>
