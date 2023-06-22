@@ -20,4 +20,87 @@
         </dropColumn>
     </changeSet>
 
+    <changeSet id="2" author="lucas">
+        <createTable tableName="categorias">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="version" type="integer">
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="lucas">
+        <createTable tableName="produtos">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="preco" type="numeric(10,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="version" type="integer">
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="lucas">
+        <createTable tableName="PRODUTOS_CATEGORIAS">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="i_categorias" type="bigint">
+                <constraints foreignKeyName="fk_categoria_id" referencedTableName="pessoas" referencedColumnNames="id"/>
+            </column>
+
+            <column name="i_produtos" type="bigint">
+                <constraints foreignKeyName="fk_produto_id" referencedTableName="pessoas" referencedColumnNames="id"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="version" type="integer">
+            </column>
+
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
