@@ -18,7 +18,14 @@ public abstract class AbstractEntity implements Serializable {
     private Timestamp createdAt;
     @Column(name="updated_at")
     private Timestamp updatedAt;
-    public AbstractEntity() {
+
+    public AbstractEntity(){
+        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
+        this.updatedAt = Timestamp.valueOf(LocalDateTime.now());
+    }
+
+    public AbstractEntity(Long id) {
+        this.id = id;
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
         this.updatedAt = Timestamp.valueOf(LocalDateTime.now());
     }
