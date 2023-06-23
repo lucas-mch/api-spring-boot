@@ -1,5 +1,6 @@
 package dev.lucasmachado.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class Produto extends AbstractEntity {
     private String nome;
     private Double preco;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "PRODUTOS_CATEGORIAS",
                joinColumns = @JoinColumn(name = "i_produtos"),
