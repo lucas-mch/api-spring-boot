@@ -101,6 +101,84 @@
             </column>
 
         </createTable>
+
+    </changeSet>
+
+    <changeSet id="5" author="lucas">
+        <createTable tableName="cidades">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="version" type="integer">
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="6" author="lucas">
+        <createTable tableName="estados">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sigla" type="varchar(2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="version" type="integer">
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="7" author="lucas.machado">
+        <addColumn tableName="cidades">
+            <column name="i_uf" type="bigint">
+                <constraints foreignKeyName="fk_uf_id" referencedTableName="estado" referencedColumnNames="id"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="8" author="lucas.machado">
+        <dropColumn tableName="cidades" columnName="i_uf">
+        </dropColumn>
+    </changeSet>
+
+    <changeSet id="9" author="lucas.machado">
+        <addColumn tableName="cidades">
+            <column name="i_estados" type="bigint">
+                <constraints foreignKeyName="fk_estados_id" referencedTableName="estados" referencedColumnNames="id"/>
+            </column>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>

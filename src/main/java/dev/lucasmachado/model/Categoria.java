@@ -1,5 +1,6 @@
 package dev.lucasmachado.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ public class Categoria extends AbstractEntity {
 
     private String nome;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 

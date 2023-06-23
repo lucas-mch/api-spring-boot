@@ -3,6 +3,7 @@ package dev.lucasmachado.services;
 import dev.lucasmachado.model.Pessoa;
 import dev.lucasmachado.repositories.EnderecoRepository;
 import dev.lucasmachado.repositories.PessoaRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,12 @@ public class PessoaService {
     public Pessoa update(Pessoa pessoa) {
         return save(pessoa);
     }
-    public Optional<Pessoa> findById(Long id) { return pessoaRepository.findById(id); }
+    public Pessoa findById(Long id) {
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+        return pessoa.orElseThrow (
+                ()-> new ObjectNotFoundException("Nenhuma pessoa encontrada com o id : " + id, Pessoa.class.getName())
+        );
+    }
     public List<Pessoa> findAll(){ return pessoaRepository.findAll(); }
 
 }
