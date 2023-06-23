@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/pessoa")
+@RequestMapping("/pessoas")
 public class PessoaResource {
 
     @Autowired
@@ -36,8 +36,8 @@ public class PessoaResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> find(@PathVariable Long id) {
-        Optional<Pessoa> pessoa = pessoaService.findById(id);
-        return ResponseEntity.ok().body(pessoa);
+        Pessoa pessoaToFind = pessoaService.findById(id);
+        return ResponseEntity.ok().body(pessoaToFind);
     }
 
     @RequestMapping(method = RequestMethod.GET)
