@@ -4,6 +4,7 @@ import dev.lucasmachado.model.Endereco;
 import dev.lucasmachado.model.Pessoa;
 import dev.lucasmachado.repositories.EnderecoRepository;
 import dev.lucasmachado.repositories.PessoaRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +18,26 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private PessoaService pessoaService;
 
     public Endereco save(Endereco endereco){ return enderecoRepository.save(endereco); }
     public Endereco saveToPessoa(Endereco endereco, Long pessoaId){
-        Optional<Pessoa> toSave = pessoaRepository.findById(pessoaId);
-        endereco.setPessoa(toSave.get());
-        Endereco enderecoSalvo = save(endereco);
+        Pessoa pessoaToSave = pessoaService.findById(pessoaId);
+        endereco.setPessoa(pessoaToSave);
+        Endereco enderecoSalvo = this.save(endereco);
         if(enderecoSalvo.getPrincipal()){
-            setEnderecoPrincipal(toSave.get().getId(), endereco.getId());
+            setEnderecoPrincipal(pessoaToSave.getId(), endereco.getId());
         }
         return enderecoSalvo;
     }
-    public List<Endereco> findAllFromPessoa(Long pessoaId){ return enderecoRepository.findAllFromPessoa(pessoaId); }
+    public List<Endereco> findAllFromPessoa(Long pessoaId) {
+        Pessoa pessoaToSave = pessoaService.findById(pessoaId);
+        List<Endereco> pessoaEnderecoList = enderecoRepository.findAllFromPessoa(pessoaId);
+        if(pessoaEnderecoList == null || pessoaEnderecoList.size() == 0) {
+            throw new ObjectNotFoundException("Nenhum endereço encontrado para a pessoa com id : " + pessoaId, Endereco.class.getName());
+        }
+        return pessoaEnderecoList;
+    }
     public Endereco setEnderecoPrincipal(Long pessoaId, Long enderecoId){
         inativaTodosEnderecos(pessoaId);
         Optional<Endereco> enderecoToSetPrincipal = enderecoRepository.findById(enderecoId);
