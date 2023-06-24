@@ -1,9 +1,8 @@
 package dev.lucasmachado.services;
 
-import dev.lucasmachado.model.Endereco;
+import dev.lucasmachado.model.localidades.Endereco;
 import dev.lucasmachado.model.Pessoa;
 import dev.lucasmachado.repositories.EnderecoRepository;
-import dev.lucasmachado.repositories.PessoaRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

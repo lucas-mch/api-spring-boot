@@ -1,6 +1,6 @@
 package dev.lucasmachado.repositories;
 
-import dev.lucasmachado.model.Endereco;
+import dev.lucasmachado.model.localidades.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
