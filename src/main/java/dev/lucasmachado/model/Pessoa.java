@@ -3,6 +3,7 @@ package dev.lucasmachado.model;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.lucasmachado.model.localidades.Endereco;
 
 
 import javax.persistence.*;

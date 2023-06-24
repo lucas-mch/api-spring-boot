@@ -1,8 +1,10 @@
 package dev.lucasmachado.model.localidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cidades")
@@ -13,6 +15,10 @@ public class Cidade extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "i_estados")
     private Estado estado;
+
+    @OneToMany(mappedBy="cidade")
+    @JsonIgnore
+    private List<Endereco> enderecos;
 
     public String getNome() {
         return nome;
