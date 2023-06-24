@@ -13,7 +13,7 @@ public class EstadoService {
     @Autowired
     private EstadoRepository estadoRepository;
 
-    public Estado save(Estado estado){
+    public Estado save(Estado estado) {
         return estadoRepository.save(estado);
     }
 

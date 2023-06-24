@@ -22,6 +22,14 @@ public class Cidade extends AbstractEntity {
         this.nome = nome;
     }
 
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
     public Cidade() {
     }
 
