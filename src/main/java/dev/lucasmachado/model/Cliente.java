@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente extends AbstractEntity {
+public class Cliente extends AbstractEntity implements Cloneable  {
 
     private String nome;
     private String email;
@@ -70,6 +70,9 @@ public class Cliente extends AbstractEntity {
         return telefones;
     }
 
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
 }
