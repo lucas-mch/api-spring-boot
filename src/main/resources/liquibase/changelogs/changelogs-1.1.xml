@@ -181,4 +181,12 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="10" author="lucas.machado">
+        <addColumn tableName="enderecos">
+            <column name="i_cidades" type="bigint">
+                <constraints foreignKeyName="fk_cidades_id" referencedTableName="cidades" referencedColumnNames="id"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
