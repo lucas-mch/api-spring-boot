@@ -1,11 +1,14 @@
 package dev.lucasmachado.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "produtos")
@@ -21,6 +24,10 @@ public class Produto extends AbstractEntity {
                inverseJoinColumns = @JoinColumn(name = "i_categorias")
     )
     private List<Categoria> categorias = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Produto() {
         super();

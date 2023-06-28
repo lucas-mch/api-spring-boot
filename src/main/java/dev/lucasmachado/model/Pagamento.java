@@ -1,5 +1,6 @@
-package dev.lucasmachado.model.pedido;
+package dev.lucasmachado.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 import dev.lucasmachado.enterprise.enums.EstadoPagamento;
 
@@ -11,6 +12,7 @@ public abstract class Pagamento extends AbstractEntity {
 
     private EstadoPagamento estado;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "i_pedidos", referencedColumnName = "pedidos")
     @MapsId
