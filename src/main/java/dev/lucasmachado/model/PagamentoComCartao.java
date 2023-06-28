@@ -1,9 +1,11 @@
-package dev.lucasmachado.model.pedido;
+package dev.lucasmachado.model;
+
+import dev.lucasmachado.model.Pagamento;
 
 import javax.persistence.Entity;
 
 @Entity
-public class PagamentoComCartao extends Pagamento{
+public class PagamentoComCartao extends Pagamento {
     private Integer numeroDeParcelas;
 
     public PagamentoComCartao() {
