@@ -1,9 +1,12 @@
 package dev.lucasmachado.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 import dev.lucasmachado.enterprise.enums.TipoCliente;
 import dev.lucasmachado.model.localidades.Endereco;
+import dev.lucasmachado.model.pedido.Pedido;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,17 +18,28 @@ import java.util.Set;
 @Table(name = "clientes")
 public class Cliente extends AbstractEntity implements Cloneable  {
 
+    @NotNull
     private String nome;
+    @NotNull
     private String email;
+    @Column(name = "cliente_cpf_cnpj")
     private String cpfOuCnpj;
+
+    @Column(name = "tipo_cliente")
     private Integer tipoCliente;
     @OneToMany(mappedBy="cliente")
-    @JsonIgnore
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
-    @CollectionTable(name = "telefones")
+    @CollectionTable(name = "telefones",
+            joinColumns=@JoinColumn(name = "i_clientes", referencedColumnName = "id")
+    )
+    @Column(name="nome")
     private Set<String> telefones = new HashSet<>();
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
     }

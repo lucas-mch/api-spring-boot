@@ -1,5 +1,7 @@
 package dev.lucasmachado.model.localidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 import dev.lucasmachado.model.Cliente;
 import dev.lucasmachado.model.Pessoa;
@@ -23,6 +25,7 @@ public class Endereco extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name="i_clientes", referencedColumnName = "id")
+    @JsonBackReference
     private Cliente cliente;
 
     public Endereco() {
