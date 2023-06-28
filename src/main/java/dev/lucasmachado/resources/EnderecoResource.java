@@ -1,6 +1,6 @@
 package dev.lucasmachado.resources;
 
-import dev.lucasmachado.model.Endereco;
+import dev.lucasmachado.model.localidades.Endereco;
 import dev.lucasmachado.services.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

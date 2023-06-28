@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="0" author="lucas.machado">
+        <createTable tableName="clientes">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="email" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="cliente_cpf_cnpj" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="tipo_cliente" type="integer">
+            </column>
+
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="version" type="integer">
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1" author="lucas.machado">
+        <createSequence sequenceName="sq_clientes" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="2" author="lucas.machado">
+        <createTable tableName="telefones">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="i_clientes" type="bigint">
+                <constraints foreignKeyName="fk_cliente_id" referencedTableName="clientes" referencedColumnNames="id"/>
+            </column>
+
+            <column name="fl_principal" type="boolean">
+            </column>
+
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="version" type="integer">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="lucas.machado">
+        <createSequence sequenceName="sq_telefones" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="4" author="lucas.machado">
+        <addColumn tableName="enderecos">
+            <column name="i_clientes" type="bigint">
+                <constraints foreignKeyName="fk_cliente_id" referencedTableName="clientes" referencedColumnNames="id"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,6 +1,10 @@
-package dev.lucasmachado.model;
+package dev.lucasmachado.model.localidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
+import dev.lucasmachado.model.Cliente;
+import dev.lucasmachado.model.Pessoa;
 
 import javax.persistence.*;
 
@@ -10,12 +14,19 @@ public class Endereco extends AbstractEntity {
     private String logradouro;
     private Integer CEP;
     private Integer numero;
-    private String cidade;
+    @ManyToOne
+    @JoinColumn(name="i_cidades", referencedColumnName = "id")
+    private Cidade cidade;
     @Column(name = "fl_principal")
     private Boolean isPrincipal = Boolean.FALSE;
     @ManyToOne
     @JoinColumn(name="i_pessoas", referencedColumnName = "id")
     private Pessoa pessoa;
+
+    @ManyToOne
+    @JoinColumn(name="i_clientes", referencedColumnName = "id")
+    @JsonBackReference
+    private Cliente cliente;
 
     public Endereco() {
     }
@@ -44,11 +55,11 @@ public class Endereco extends AbstractEntity {
         this.numero = numero;
     }
 
-    public String getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
 
@@ -88,7 +99,7 @@ public class Endereco extends AbstractEntity {
             entity.numero = numero;
             return this;
         }
-        public Builder cidade(String cidade) {
+        public Builder cidade(Cidade cidade) {
             entity.cidade = cidade;
             return this;
         }
@@ -99,8 +110,6 @@ public class Endereco extends AbstractEntity {
         public Endereco build(){
             return entity;
         }
-
-
 
     }
 }
