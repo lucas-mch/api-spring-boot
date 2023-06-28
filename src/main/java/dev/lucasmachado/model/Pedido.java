@@ -1,5 +1,6 @@
 package dev.lucasmachado.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 import dev.lucasmachado.model.Cliente;
@@ -16,13 +17,12 @@ import java.util.Set;
 @Table(name = "pedidos")
 public class Pedido extends AbstractEntity {
 
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date instante;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "i_clientes")
     private Cliente cliente;
@@ -37,6 +37,13 @@ public class Pedido extends AbstractEntity {
     public Pedido() {
     }
 
+    public Pedido(Long id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
+        super(id);
+        this.instante = instante;
+        this.cliente = cliente;
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
     public Date getInstante() {
         return instante;
     }
@@ -45,4 +52,31 @@ public class Pedido extends AbstractEntity {
         this.instante = instante;
     }
 
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Endereco getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(Endereco enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
 }

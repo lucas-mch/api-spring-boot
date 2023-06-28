@@ -18,4 +18,12 @@ public abstract class Pagamento extends AbstractEntity {
     @MapsId
     private Pedido pedido;
 
+    public Pagamento() {
+    }
+
+    public Pagamento(Long id, EstadoPagamento estado, Pedido pedido) {
+        super(id);
+        this.estado = estado;
+        this.pedido = pedido;
+    }
 }

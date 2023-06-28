@@ -1,5 +1,6 @@
 package dev.lucasmachado.model;
 
+import dev.lucasmachado.enterprise.enums.EstadoPagamento;
 import dev.lucasmachado.model.Pagamento;
 
 import javax.persistence.Entity;
@@ -12,6 +13,13 @@ public class PagamentoComBoleto extends Pagamento {
     private Date dataPagamento;
 
     public PagamentoComBoleto() {
+        super();
+    }
+
+    public PagamentoComBoleto(Long id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
+        super(id, estado, pedido);
+        this.dataVencimento = dataVencimento;
+        this.dataPagamento = dataPagamento;
     }
 
     public Date getDataVencimento() {

@@ -17,7 +17,7 @@ public class Produto extends AbstractEntity {
     private String nome;
     private Double preco;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUTOS_CATEGORIAS",
                joinColumns = @JoinColumn(name = "i_produtos"),
@@ -59,5 +59,21 @@ public class Produto extends AbstractEntity {
         return categorias;
     }
 
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    @JsonIgnore
+    public List<Pedido> getPedidos() {
+        List<Pedido> lista = new ArrayList<>();
+        for (ItemPedido x : itens) {
+            lista.add(x.getPedido());
+        }
+        return lista;
+    }
 
 }
