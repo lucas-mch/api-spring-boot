@@ -1,12 +1,12 @@
 package dev.lucasmachado.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 import dev.lucasmachado.enterprise.enums.TipoCliente;
 import dev.lucasmachado.model.localidades.Endereco;
-import dev.lucasmachado.model.pedido.Pedido;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,8 +27,7 @@ public class Cliente extends AbstractEntity implements Cloneable  {
 
     @Column(name = "tipo_cliente")
     private Integer tipoCliente;
-    @OneToMany(mappedBy="cliente")
-    @JsonManagedReference
+    @OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
@@ -38,10 +37,19 @@ public class Cliente extends AbstractEntity implements Cloneable  {
     @Column(name="nome")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
+    }
+
+    public Cliente(Long id, String nome, String email, String cpfOuCnpj, Integer tipoCliente) {
+        super(id);
+        this.nome = nome;
+        this.email = email;
+        this.cpfOuCnpj = cpfOuCnpj;
+        this.tipoCliente = tipoCliente;
     }
 
     public String getNome() {
@@ -82,6 +90,10 @@ public class Cliente extends AbstractEntity implements Cloneable  {
 
     public Set<String> getTelefones() {
         return telefones;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
     @Override

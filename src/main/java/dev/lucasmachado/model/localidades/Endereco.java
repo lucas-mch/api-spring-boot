@@ -31,6 +31,16 @@ public class Endereco extends AbstractEntity {
     public Endereco() {
     }
 
+    public Endereco(Long id, String logradouro, Integer CEP, Integer numero, Cidade cidade, Boolean isPrincipal, Cliente cliente) {
+        super(id);
+        this.logradouro = logradouro;
+        this.CEP = CEP;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.isPrincipal = isPrincipal;
+        this.cliente = cliente;
+    }
+
     public String getLogradouro() {
         return logradouro;
     }

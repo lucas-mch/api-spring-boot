@@ -20,6 +20,15 @@ public class Cidade extends AbstractEntity {
     @JsonIgnore
     private List<Endereco> enderecos;
 
+    public Cidade() {
+    }
+
+    public Cidade(Long id, String nome, Estado estado) {
+        super(id);
+        this.nome = nome;
+        this.estado = estado;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -36,7 +45,6 @@ public class Cidade extends AbstractEntity {
         this.estado = estado;
     }
 
-    public Cidade() {
-    }
+
 
 }

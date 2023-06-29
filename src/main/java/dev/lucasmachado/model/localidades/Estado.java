@@ -1,11 +1,13 @@
 package dev.lucasmachado.model.localidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +18,17 @@ public class Estado extends AbstractEntity {
     private String sigla;
 
     @OneToMany(mappedBy = "estado")
-    private List<Cidade> cidades;
+    @JsonIgnore
+    private List<Cidade> cidades = new ArrayList<>();
+
+    public Estado() {
+    }
+
+    public Estado(Long id, String nome, String sigla) {
+        super(id);
+        this.nome = nome;
+        this.sigla = sigla;
+    }
 
     public String getNome() {
         return nome;
@@ -34,4 +46,7 @@ public class Estado extends AbstractEntity {
         this.sigla = sigla;
     }
 
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
 }

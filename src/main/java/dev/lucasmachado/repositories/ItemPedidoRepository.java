@@ -1,9 +1,9 @@
 package dev.lucasmachado.repositories;
 
-import dev.lucasmachado.model.Pagamento;
+import dev.lucasmachado.model.ItemPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
 }
