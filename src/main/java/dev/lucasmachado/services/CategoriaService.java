@@ -27,17 +27,20 @@ public class CategoriaService {
         return categorias.stream().map(CategoriaDTO::new).collect(Collectors.toList());
     }
 
-    public Categoria findById(Long id) {
-        return categoriaRepository.findById(id).orElseThrow(
+    public CategoriaDTO findById(Long id) {
+        Categoria categoria = categoriaRepository.findById(id).orElseThrow(
                 () -> new ObjectNotFoundException(Categoria.class, "Categoria com o id : " + id + " nao encontrada.")
         );
+        return new CategoriaDTO(categoria);
     }
 
-    public Categoria save(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+    public Categoria save(CategoriaDTO categoria) {
+        Categoria categoriaToSave = this.fromDto(categoria);
+        return categoriaRepository.save(categoriaToSave);
     }
 
-    public Categoria update(Categoria categoria) {
+    public Categoria update(CategoriaDTO categoriaDTO) {
+        Categoria categoria = this.fromDto(categoriaDTO);
         findById(categoria.getId());
         return categoriaRepository.saveAndFlush(categoria);
     }
@@ -60,5 +63,8 @@ public class CategoriaService {
         return categoriaRepository.findAll(pageRequest).map(CategoriaDTO::new);
     }
 
+    private Categoria fromDto(CategoriaDTO categoriaDTO) {
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+    }
 
 }

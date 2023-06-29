@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class CategoriaResource {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        Categoria categoriaToFind = categoriaService.findById(id);
+        CategoriaDTO categoriaToFind = categoriaService.findById(id);
         return ResponseEntity.ok().body(categoriaToFind);
     }
 
@@ -32,19 +33,19 @@ public class CategoriaResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@RequestBody Categoria categoria) {
+    public ResponseEntity<Void> save(@Valid @RequestBody CategoriaDTO categoria) {
         categoria.setId(null);
-        categoria = categoriaService.save(categoria);
+        Categoria categoriaSalved = categoriaService.save(categoria);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(categoria.getId()).toUri();
+                .path("/{id}").buildAndExpand(categoriaSalved.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@PathVariable Long id,
-                                       @RequestBody Categoria categoria) {
+                                       @Valid @RequestBody CategoriaDTO categoria) {
         categoria.setId(id);
-        categoria = categoriaService.update(categoria);
+        categoriaService.update(categoria);
         return ResponseEntity.noContent().build();
     }
 

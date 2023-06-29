@@ -1,32 +1,26 @@
 package dev.lucasmachado.dto;
 
+import dev.lucasmachado.enterprise.entities.AbstractDTO;
 import dev.lucasmachado.model.Categoria;
+import org.hibernate.validator.constraints.Length;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
 
-public class CategoriaDTO implements Serializable {
+public class CategoriaDTO extends AbstractDTO {
 
-    private Long id;
-
+    @NotEmpty(message = "Preenchimento obrigatorio")
+    @Length(min = 5, max = 80, message = "O tamanho deve ser entre 5 a 80 caracteres.")
     private String nome;
 
     public CategoriaDTO() {
     }
     public CategoriaDTO(Categoria categoria) {
-        this.id = categoria.getId();
+        super(categoria.getId());
         this.nome = categoria.getNome();
     }
     public CategoriaDTO(Long id, String nome) {
-        this.id = id;
+        super(id);
         this.nome = nome;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
