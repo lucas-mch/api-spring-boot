@@ -1,8 +1,10 @@
 package dev.lucasmachado.resources;
 
+import dev.lucasmachado.dto.CategoriaDTO;
 import dev.lucasmachado.model.Categoria;
 import dev.lucasmachado.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,7 +27,7 @@ public class CategoriaResource {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public  ResponseEntity<?> listarCategorias() {
-        List<Categoria> categorias = categoriaService.listarCategorias();
+        List<CategoriaDTO> categorias = categoriaService.listarCategorias();
         return ResponseEntity.ok().body(categorias);
     }
 
@@ -50,6 +52,15 @@ public class CategoriaResource {
     public  ResponseEntity<Void> deleteCategoria(@PathVariable Long id) {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "page", method = RequestMethod.GET)
+    public  ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                     @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+                                                     @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+                                                     @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+        Page<CategoriaDTO> categorias = categoriaService.findPage(page, linesPerPage, orderBy, direction);
+        return ResponseEntity.ok().body(categorias);
     }
 
 }
