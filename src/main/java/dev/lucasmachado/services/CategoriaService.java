@@ -22,7 +22,7 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public List<CategoriaDTO> listarCategorias() throws EntityNotFoundException {
+    public List<CategoriaDTO> listarCategorias() {
         List<Categoria> categorias = categoriaRepository.findAll();
         return categorias.stream().map(CategoriaDTO::new).collect(Collectors.toList());
     }
