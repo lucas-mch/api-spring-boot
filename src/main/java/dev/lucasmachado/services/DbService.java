@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class DbService {
 
     @Autowired
-    private BCryptPasswordEncoder pe;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
@@ -184,11 +184,24 @@ public class DbService {
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-        Cliente cli1 = new Cliente(null, "Maria Silva", "nelio.cursos@gmail.com", "36378912377", 1);
+        Cliente cli1 = new Cliente(null,
+                "Maria Silva",
+                "nelio.cursos@gmail.com",
+                "36378912377",
+                1,
+                bCryptPasswordEncoder.encode("123")
+        );
 
         cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
-        Cliente cli2 = new Cliente(null, "Ana Costa", "nelio.iftm@gmail.com", "31628382740", 1);
+        Cliente cli2 = new Cliente(null,
+                "Ana Costa",
+                "nelio.iftm@gmail.com",
+                "31628382740",
+                1,
+                bCryptPasswordEncoder.encode("456")
+        );
+
         cli2.getTelefones().addAll(Arrays.asList("93883321", "34252625"));
 
 //        cli2.addPerfil(Perfil.ADMIN);

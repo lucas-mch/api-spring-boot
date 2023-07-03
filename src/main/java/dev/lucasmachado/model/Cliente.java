@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente extends AbstractEntity implements Cloneable  {
+public class Cliente extends AbstractEntity implements Cloneable {
 
     @NotNull
     private String nome;
@@ -24,19 +24,18 @@ public class Cliente extends AbstractEntity implements Cloneable  {
     private String email;
     @Column(name = "cliente_cpf_cnpj")
     private String cpfOuCnpj;
-
     @Column(name = "tipo_cliente")
     private Integer tipoCliente;
-    @OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
+    @JsonIgnore
+    private String senha;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
-
     @ElementCollection
     @CollectionTable(name = "telefones",
-            joinColumns=@JoinColumn(name = "i_clientes", referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "i_clientes", referencedColumnName = "id")
     )
-    @Column(name="nome")
+    @Column(name = "nome")
     private Set<String> telefones = new HashSet<>();
-
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
@@ -50,6 +49,15 @@ public class Cliente extends AbstractEntity implements Cloneable  {
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipoCliente = tipoCliente;
+    }
+
+    public Cliente(Long id, String nome, String email, String cpfOuCnpj, Integer tipoCliente,String senha) {
+        super(id);
+        this.nome = nome;
+        this.email = email;
+        this.cpfOuCnpj = cpfOuCnpj;
+        this.tipoCliente = tipoCliente;
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -95,6 +103,10 @@ public class Cliente extends AbstractEntity implements Cloneable  {
     public List<Pedido> getPedidos() {
         return pedidos;
     }
+
+    public String getSenha() { return senha; }
+
+    public void setSenha(String senha) { this.senha = senha; }
 
     @Override
     public Object clone() throws CloneNotSupportedException {
