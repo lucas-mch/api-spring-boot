@@ -2,17 +2,21 @@ package dev.lucasmachado.services;
 
 import dev.lucasmachado.dto.CategoriaDTO;
 import dev.lucasmachado.dto.ClienteDTO;
+import dev.lucasmachado.enterprise.enums.TipoPerfil;
 import dev.lucasmachado.enterprise.exceptions.DataIntegrityException;
+import dev.lucasmachado.enterprise.security.UserSpringSecurity;
 import dev.lucasmachado.model.Categoria;
 import dev.lucasmachado.model.Cliente;
 import dev.lucasmachado.model.Pessoa;
 import dev.lucasmachado.repositories.ClienteRepository;
+import org.apache.kafka.common.errors.AuthorizationException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +25,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -70,5 +77,20 @@ public class ClienteService {
     public ClienteDTO toDTO(Cliente cliente){
         return new ClienteDTO(cliente);
     }
+
+    public Cliente findByEmail(String email) {
+        UserSpringSecurity user = UserService.authenticated();
+        if (user == null || !user.hasRole(TipoPerfil.ADMIN) && !email.equals(user.getUsername())) {
+            throw new AuthorizationException("Acesso negado");
+        }
+
+        Cliente obj = clienteRepository.findByEmail(email);
+        if (obj == null) {
+            throw new EntityNotFoundException(
+                    "Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Cliente.class.getName());
+        }
+        return obj;
+    }
+
 
 }

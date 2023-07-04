@@ -1,11 +1,13 @@
 package dev.lucasmachado.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import dev.lucasmachado.enterprise.enums.EstadoPagamento;
 import dev.lucasmachado.model.Pagamento;
 
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
     private Integer numeroDeParcelas;
 
