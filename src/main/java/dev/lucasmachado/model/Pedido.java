@@ -1,16 +1,13 @@
 package dev.lucasmachado.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
-import dev.lucasmachado.model.Cliente;
-import dev.lucasmachado.model.ItemPedido;
-import dev.lucasmachado.model.Pagamento;
 import dev.lucasmachado.model.localidades.Endereco;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -78,5 +75,17 @@ public class Pedido extends AbstractEntity {
 
     public Set<ItemPedido> getItens() {
         return itens;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Pedido{");
+        sb.append("instante=").append(instante);
+        sb.append(", pagamento=").append(pagamento);
+        sb.append(", cliente=").append(cliente);
+        sb.append(", enderecoEntrega=").append(enderecoEntrega);
+        sb.append(", itens=").append(itens);
+        sb.append('}');
+        return sb.toString();
     }
 }
