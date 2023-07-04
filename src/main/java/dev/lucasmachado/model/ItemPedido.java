@@ -62,4 +62,25 @@ public class ItemPedido implements Serializable {
         this.preco = preco;
     }
 
+    public void setPedido(Pedido pedido) {
+        id.setPedido(pedido);
+    }
+
+    public Produto getProduto() {
+        return id.getProduto();
+    }
+
+    public void setProduto(Produto produto) {
+        id.setProduto(produto);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ItemPedido{");
+        sb.append(getProduto().getNome());
+        sb.append("quantidade=").append(quantidade);
+        sb.append(", preco=").append(preco);
+        sb.append('}');
+        return sb.toString();
+    }
 }

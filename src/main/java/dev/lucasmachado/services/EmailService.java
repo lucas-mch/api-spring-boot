@@ -6,9 +6,8 @@ import org.springframework.mail.SimpleMailMessage;
 
 public interface EmailService {
 
-	void sendOrderConfirmationEmail(Pedido obj);
-	
-	void sendEmail(SimpleMailMessage msg);
-	
+	void sendOrderConfirmationEmail(Pedido pedido);
+	void sendEmail(SimpleMailMessage message);
 	void sendNewPasswordEmail(Cliente cliente, String newPass);
+
 }
