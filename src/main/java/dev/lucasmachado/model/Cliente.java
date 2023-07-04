@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import dev.lucasmachado.enterprise.entities.AbstractEntity;
 import dev.lucasmachado.enterprise.enums.TipoCliente;
+import dev.lucasmachado.enterprise.enums.TipoPerfil;
 import dev.lucasmachado.model.localidades.Endereco;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "clientes")
@@ -40,7 +42,12 @@ public class Cliente extends AbstractEntity implements Cloneable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "cliente_perfil")
+    private Set<Integer> perfis = new HashSet<>();
+
     public Cliente() {
+        addPerfis(TipoPerfil.CLIENTE);
     }
 
     public Cliente(Long id, String nome, String email, String cpfOuCnpj, Integer tipoCliente) {
@@ -49,6 +56,7 @@ public class Cliente extends AbstractEntity implements Cloneable {
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipoCliente = tipoCliente;
+        addPerfis(TipoPerfil.CLIENTE);
     }
 
     public Cliente(Long id, String nome, String email, String cpfOuCnpj, Integer tipoCliente,String senha) {
@@ -58,6 +66,7 @@ public class Cliente extends AbstractEntity implements Cloneable {
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipoCliente = tipoCliente;
         this.senha = senha;
+        addPerfis(TipoPerfil.CLIENTE);
     }
 
     public String getNome() {
@@ -107,6 +116,14 @@ public class Cliente extends AbstractEntity implements Cloneable {
     public String getSenha() { return senha; }
 
     public void setSenha(String senha) { this.senha = senha; }
+
+    public Set<TipoPerfil> getPerfis() {
+        return perfis.stream().map(TipoPerfil::toEnum).collect(Collectors.toSet());
+    }
+
+    public void addPerfis(TipoPerfil tipoPerfil) {
+        this.perfis.add(tipoPerfil.getCodigo());
+    }
 
     @Override
     public Object clone() throws CloneNotSupportedException {

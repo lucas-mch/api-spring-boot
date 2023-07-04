@@ -1,6 +1,7 @@
 package dev.lucasmachado.services;
 
 import dev.lucasmachado.enterprise.enums.EstadoPagamento;
+import dev.lucasmachado.enterprise.enums.TipoPerfil;
 import dev.lucasmachado.model.*;
 import dev.lucasmachado.model.localidades.Cidade;
 import dev.lucasmachado.model.localidades.Endereco;
@@ -204,7 +205,7 @@ public class DbService {
 
         cli2.getTelefones().addAll(Arrays.asList("93883321", "34252625"));
 
-//        cli2.addPerfil(Perfil.ADMIN);
+        cli2.addPerfis(TipoPerfil.ADMIN);
 
 
         Endereco e1 = new Endereco(null, "Rua Flores", 38220834, 300, c1, true, cli1);

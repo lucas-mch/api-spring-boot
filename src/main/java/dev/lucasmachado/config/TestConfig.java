@@ -1,17 +1,11 @@
 package dev.lucasmachado.config;
 
 import dev.lucasmachado.services.DbService;
-import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.clients.consumer.Consumer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.TopicPartition;
-import org.springframework.kafka.core.ConsumerFactory;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
 
 import java.text.ParseException;
 
