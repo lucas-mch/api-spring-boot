@@ -1,35 +1,27 @@
 package dev.lucasmachado.dto;
 
-import dev.lucasmachado.enterprise.entities.AbstractDTO;
+public class CredenciaisDTO {
 
-public class CredenciaisDTO extends AbstractDTO {
+    private String email;
 
-    private String username;
-
-    private String password;
+    private String senha;
 
     public CredenciaisDTO() {
     }
 
-    public CredenciaisDTO(Long id, String username, String password) {
-        super(id);
-        this.username = username;
-        this.password = password;
+    public String getEmail() {
+        return email;
     }
 
-    public String getUsername() {
-        return username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getSenha() {
+        return senha;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

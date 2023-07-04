@@ -47,7 +47,7 @@ public class JWTUtil {
 
     private Claims getClaims(String token) {
         try {
-            return Jwts.parser().setSigningKey(jwtSecret.getBytes()).parseClaimsJws(token).getBody();
+            return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
         }
         catch (Exception e) {
             return null;

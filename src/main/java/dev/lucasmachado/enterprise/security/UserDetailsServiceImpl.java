@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Cliente cli = clienteRepository.findByEmail(email);
-        if(cli == null){
+        if(cli == null) {
             throw new UsernameNotFoundException(email);
         }
         return new UserSpringSecurity(
