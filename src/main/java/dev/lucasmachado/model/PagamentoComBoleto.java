@@ -1,5 +1,6 @@
 package dev.lucasmachado.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import dev.lucasmachado.enterprise.enums.EstadoPagamento;
 import dev.lucasmachado.model.Pagamento;
 
@@ -7,13 +8,14 @@ import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento {
 
     private Date dataVencimento;
     private Date dataPagamento;
 
-    public PagamentoComBoleto() {
-        super();
+    public PagamentoComBoleto(){
+
     }
 
     public PagamentoComBoleto(Long id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
