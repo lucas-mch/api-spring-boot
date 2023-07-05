@@ -9,6 +9,7 @@ import dev.lucasmachado.model.Pedido;
 import dev.lucasmachado.repositories.ItemPedidoRepository;
 import dev.lucasmachado.repositories.PagamentoRepository;
 import dev.lucasmachado.repositories.PedidoRepository;
+import dev.lucasmachado.services.email.EmailService;
 import org.apache.kafka.common.errors.AuthorizationException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,7 @@ public class PedidoService {
             ip.setPedido(obj);
         }
         itemPedidoRepository.saveAll(obj.getItens());
-        emailService.sendOrderConfirmationEmail(obj);
+        emailService.sendOrderHtmlConfirmationEmail(obj);
         return obj;
     }
 

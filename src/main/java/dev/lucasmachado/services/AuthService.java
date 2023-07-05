@@ -3,12 +3,12 @@ package dev.lucasmachado.services;
 import dev.lucasmachado.dto.EmailDTO;
 import dev.lucasmachado.model.Cliente;
 import dev.lucasmachado.repositories.ClienteRepository;
+import dev.lucasmachado.services.email.EmailService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Random;
 
 @Service

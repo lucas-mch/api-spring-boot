@@ -2,9 +2,8 @@ package dev.lucasmachado.config;
 
 import dev.lucasmachado.services.DbService;
 
-import dev.lucasmachado.services.EmailService;
-import dev.lucasmachado.services.MockEmailService;
-import dev.lucasmachado.services.SmtpEmailService;
+import dev.lucasmachado.services.email.EmailService;
+import dev.lucasmachado.services.email.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
